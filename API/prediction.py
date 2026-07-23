@@ -155,11 +155,7 @@ def predict(data: StudentData):
     try:
         features_df = build_feature_vector(data)
         features_scaled = scaler.transform(features_df)
-        prediction = model.predict(features_scaled)[0]
-
-        # Job_Offers is a bounded discrete target (0-5) in the training data,
-        # so we clip the raw regression output into that realistic range
-        # before rounding, and present both the raw and rounded value.
+        prediction = model.predict(features_scaled)[0] 
         clipped = float(np.clip(prediction, 0, 5))
 
         return PredictionResponse(
